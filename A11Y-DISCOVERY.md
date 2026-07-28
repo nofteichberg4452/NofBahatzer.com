@@ -88,9 +88,54 @@ site/
 ---
 
 ## ציון Baseline (Lighthouse Accessibility)
-*נדרש ריצה ידנית — משוער 55-65 בהתבסס על הליקויים*
+*משוער 55-65 בהתבסס על הליקויים שנמצאו — נדרש ריצה ידנית לאישור*
+
+---
+
+## ✅ תיקונים שבוצעו (feature/accessibility-5568)
+
+| שלב | פריט | קובץ |
+|---|---|---|
+| P0 | תיעוד גילוי, טבלת צבעים | A11Y-DISCOVERY.md |
+| P0 §3.1 | עמוד הצהרת נגישות | accessibility.html |
+| P1 §4.1 | `<main id="main-content">`, landmarks מלאים | index.html |
+| P1 §4.2 | קישור "דלג לתוכן הראשי" | index.html |
+| P1 §4.3 | `:focus-visible` גלובלי, צבע focus עם ניגודיות 4.6:1 | index.html |
+| P1 §4.4 | H1 יחיד, section-labels הפכו ל-`<p aria-hidden="true">` | index.html |
+| P3.2 | רכיב נגישות מובנה (גודל, ניגודיות, קישורים, גופן, תנועה) | index.html |
+| P5.1 | כפתור עצור/הפעל וידאו (44×44px, ARIA) | index.html |
+| P5.1 | prefers-reduced-motion — וידאו מוחלף ב-poster | index.html |
+| P5.2 | מודאל גיוס: role=dialog, aria-modal, focus trap, Esc, sessionStorage | index.html |
+| P5.3 | קרוסלה: aria-roledescription, aria-label לכפתורים, inert על slides מוסתרות | index.html |
+| P5.4 | קישור לוגו: מ-`href="#"` ל-`href="#main-content"` | index.html |
+| P5.4 | aria-label לכל קישורי הפוטר | index.html |
+| P5.5 | alt="" לתמונות דקורטיביות; alt משמעותי לתמונות נושאות מידע | index.html |
+| P6 | overlay Hero הוכהה (0.35→0.65) לניגודיות טקסט לבן מעל וידאו | index.html |
+| P7 | אחדות קישור תפריט: `hopa.tech` בלבד | index.html |
+| P7 | min-height 44px לכפתורים וקישורי nav/footer | index.html |
+| P7 | viewport ללא user-scalable=no | index.html |
+| §3.1 | קישור "הצהרת נגישות" בפוטר | index.html |
+
+---
+
+## נותר למילוי ידני ע"י צוות נוף בחצר
+
+1. **פרטי ממונה נגישות** בקובץ `accessibility.html`: שם, טלפון, דוא"ל
+2. **פרטי נגישות פיזית**: חנייה, כניסה, שירותים, מסלולי תנועה
+3. **תאריך עדכון ההצהרה**
+4. **מגבלות ידועות** (אם קיימות)
+5. **אישור מול מורשה נגישות מוסמך** — ממולץ בהתאם לתקנות
+
+---
+
+## הבהרה: רכיב הנגישות אינו תחליף לתיקוני הקוד
+
+רכיב הנגישות (כפתור ♿) הוא **תוספת** שמאפשרת התאמות שכבתיות (גודל, ניגודיות, תנועה).
+כל תיקוני הנגישות הבסיסיים בוצעו ישירות בקוד HTML/CSS/JS — מבנה landmarks, alt text,
+focus management, modal dialog, ARIA — ואינם תלויים ברכיב.
+הדף נגיש גם ללא הפעלת הרכיב.
 
 ---
 
 ## ציון סופי (לאחר תיקונים)
-*לעדכן אחרי הרצת Lighthouse סופית*
+*להריץ Lighthouse / axe אחרי פריסה לסביבה עם HTTPS — משוער ≥95*
