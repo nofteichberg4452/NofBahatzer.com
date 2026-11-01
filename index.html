@@ -613,11 +613,98 @@
 
   .modal-box {
     background: var(--beige-light);
-    max-width: 440px;
+    max-width: 760px;
     width: 100%;
-    padding: 48px 44px 40px;
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+    padding: 44px 40px 28px;
     position: relative;
     text-align: center;
+  }
+
+  /* Split popup: two separate topic cards, side by side; stacked on mobile */
+  .modal-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-top: 4px;
+  }
+  .modal-panel {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-top: 4px solid var(--green);
+    padding: 26px 24px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .modal-panel p.modal-eyebrow {
+    flex: 0 0 auto;
+    display: inline-block;
+    background: var(--green);
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.4;
+    padding: 5px 14px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+  }
+  .modal-panel h2 {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 25px;
+    font-weight: 700;
+    color: var(--green-dark);
+    margin-bottom: 14px;
+    line-height: 1.3;
+  }
+  .modal-panel p {
+    font-size: 14px;
+    color: var(--text-soft);
+    line-height: 1.85;
+    margin-bottom: 22px;
+    flex: 1;
+  }
+  .modal-panel p strong { color: var(--text); font-weight: 700; }
+  .modal-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--green);
+    color: var(--white);
+    text-decoration: none;
+    padding: 13px 22px;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0;
+    border: 1px solid var(--green);
+    min-height: 48px;
+    width: 100%;
+    max-width: 300px;
+    transition: background 0.2s;
+  }
+  .modal-cta:hover { background: var(--green-dark); border-color: var(--green-dark); }
+  .modal-phone {
+    margin-top: 10px;
+    font-size: 14px;
+    color: var(--text-soft);
+    text-decoration: none;
+    min-height: 32px;
+    display: inline-flex;
+    align-items: center;
+    direction: ltr;
+  }
+  .modal-phone:hover { color: var(--green); }
+  /* keep both CTAs on the same line on desktop (hiring card has a phone line under its button) */
+  .modal-panel:first-child .modal-cta { margin-bottom: 42px; }
+
+  @media (max-width: 640px) {
+    .modal-box { padding: 52px 16px 16px; }
+    .modal-split { grid-template-columns: 1fr; gap: 14px; }
+    .modal-panel { padding: 22px 18px 20px; }
+    .modal-panel:first-child .modal-cta { margin-bottom: 0; }
+    .modal-panel h2 { font-size: 23px; }
   }
 
   .modal-close {
@@ -712,46 +799,66 @@
   </div>
 </div>
 
-<!-- P5.2 — Accessible Hiring Modal (hidden until auto-opened once per session) -->
+<!-- P5.2 — Accessible split announcement modal (Friday bookings + hiring), auto-opened once per session -->
 <div
   class="modal-backdrop"
   id="hiringBackdrop"
   role="dialog"
   aria-modal="true"
-  aria-labelledby="hiringTitle"
+  aria-label="עדכונים מנוף בחצר"
 >
   <div class="modal-box">
     <button class="modal-close" id="modalCloseBtn" aria-label="סגור חלון">&#x2715;</button>
 
     <!-- Logo here is decorative — alt="" -->
-    <img src="images/logo.png" alt="" aria-hidden="true" style="height:64px;width:auto;margin-bottom:24px;">
+    <img src="images/logo.png" alt="" aria-hidden="true" style="height:56px;width:auto;margin-bottom:18px;">
 
-    <!-- decorative eyebrow label -->
-    <p aria-hidden="true" style="font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--green);margin-bottom:14px;font-weight:400;">מגייסים צוות</p>
+    <div class="modal-split">
 
-    <!-- h2 is the modal title — labelledby points here -->
-    <h2 id="hiringTitle" style="font-family:'Frank Ruhl Libre',serif;font-size:26px;font-weight:400;color:var(--text);margin-bottom:16px;line-height:1.35;">
-      אנשים טובים שהם משפחה
-    </h2>
+      <!-- Panel 1: Friday bookings -->
+      <section class="modal-panel" aria-labelledby="fridayTitle">
+        <p class="modal-eyebrow" aria-hidden="true">חדש בשישי</p>
+        <h2 id="fridayTitle">פותחים את יום שישי איתנו!</h2>
+        <p>
+          מעכשיו ניתן להזמין מקום מראש גם בימי שישי, בין השעות <strong dir="ltr" style="white-space:nowrap;">08:00–12:00</strong>.<br>
+          כמו תמיד, אפשר להגיע גם באופן ספונטני על בסיס מקום פנוי, אבל מומלץ לשריין מקום מראש.<br>
+          שימו לב, בימי שישי אנחנו נסגרים בשעה 16:00.
+        </p>
+        <a
+          class="modal-cta"
+          href="https://ontopo.co.il/nofbahatzer?source=homepage"
+          target="_blank"
+          rel="noopener noreferrer"
+        >שריינו לכם מקום לשישי הקרוב</a>
+      </section>
 
-    <p style="font-size:14px;color:var(--text-soft);line-height:1.85;margin-bottom:28px;">
-      אנחנו מחפשים אנשים טובים שאוהבים לארח ולשמח.
-      תנאים מעולים, סביבת עבודה חמה ומשפחתית, ומקום שבאמת שווה לבוא אליו בבוקר.
-    </p>
+      <!-- Panel 2: Hiring -->
+      <section class="modal-panel" aria-labelledby="hiringTitle">
+        <p class="modal-eyebrow" aria-hidden="true">מצטרפים לצוות שלנו</p>
+        <h2 id="hiringTitle">דרושים/ות מלצרים/ות</h2>
+        <p>
+          אחרי צבא? מחפשים מקום שכיף לעבוד בו?<br>
+          אנחנו מחפשים אנשים טובים שיצטרפו לצוות שלנו!<br>
+          שכר ותנאים מעולים, סביבת עבודה צעירה, חמה ומשפחתית.<br>
+          <strong>משמרות סופ״ש חובה.</strong>
+        </p>
+        <a
+          id="modalWhatsappLink"
+          class="modal-cta"
+          href="https://api.whatsapp.com/send?phone=972548152452&text=%D7%94%D7%99%D7%99%20%D7%99%D7%A2%D7%9C%2C%20%D7%A8%D7%90%D7%99%D7%AA%D7%99%20%D7%91%D7%90%D7%AA%D7%A8%20%D7%A9%D7%90%D7%AA%D7%9D%20%D7%9E%D7%92%D7%99%D7%99%D7%A1%D7%99%D7%9D%20%D7%9E%D7%9C%D7%A6%D7%A8%D7%99%D7%9D/%D7%95%D7%AA%20%F0%9F%99%82"
+          target="_blank"
+          rel="noopener noreferrer"
+        >לפרטים ושליחת מועמדות בוואטסאפ</a>
+        <a class="modal-phone" href="tel:+972548152452" aria-label="התקשרו: 054-815-2452">054-815-2452</a>
+      </section>
 
-    <a
-      id="modalWhatsappLink"
-      href="https://api.whatsapp.com/send?phone=9720542364455&text=%D7%94%D7%99%D7%99%2C%20%D7%A8%D7%90%D7%99%D7%AA%D7%99%20%D7%A9%D7%90%D7%AA%D7%9D%20%D7%9E%D7%92%D7%99%D7%99%D7%A1%D7%99%D7%9D%20%D7%A6%D7%95%D7%95%D7%AA%20%F0%9F%99%82"
-      target="_blank"
-      rel="noopener noreferrer"
-      style="display:inline-flex;align-items:center;justify-content:center;background:var(--green);color:var(--white);text-decoration:none;padding:13px 32px;font-size:14px;letter-spacing:1px;border:1px solid var(--green);font-family:inherit;margin-bottom:14px;min-height:44px;transition:background 0.2s;"
-    >שלחו לנו וואטסאפ</a>
+    </div>
 
-    <div style="margin-top:4px;">
+    <div style="margin-top:14px;">
       <button
         id="modalDismissBtn"
         style="background:none;border:none;font-size:13px;color:var(--text-soft);cursor:pointer;font-family:inherit;text-decoration:underline;min-height:44px;padding:0 8px;"
-      >אולי בפעם אחרת</button>
+      >סגירה</button>
     </div>
   </div>
 </div>
@@ -1048,10 +1155,10 @@
   dismissBtn.addEventListener('click', closeModal);
 
   // Auto-open once per session with slight delay
-  if (!sessionStorage.getItem('hiringPopupSeen')) {
+  if (!sessionStorage.getItem('announcePopupSeen_v2')) {
     setTimeout(function () {
       openModal();
-      sessionStorage.setItem('hiringPopupSeen', '1');
+      sessionStorage.setItem('announcePopupSeen_v2', '1');
     }, 800);
   }
 }());
